@@ -722,3 +722,40 @@ body.js-ready .reveal.active {
         font-size: 0.85rem;
     }
 }
+
+/* ==========================================================================
+   INFOGRAPHIC IMAGE DISPLAY
+   ========================================================================== */
+.infographic-wrapper {
+    width: 100%;
+    max-width: 650px;
+    margin: 2rem auto;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 230, 118, 0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.infographic-wrapper:hover {
+    border-color: var(--border-highlight);
+    transform: translateY(-3px);
+}
+
+.infographic-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .infographic-wrapper {
+        margin: 1.5rem auto;
+        border-radius: 12px;
+    }
+}
+
