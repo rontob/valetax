@@ -585,6 +585,71 @@ ul {
 }
 
 /* ACCESSIBILITY PREFERS REDUCED MOTION */
-@media (prefers-reduced-motion: reduce) {
-    .reveal, .animated-line, .btn { transition: none !important; animation: none !important; }
+@media (max-width: 768px) {
+    /* 1. Sembunyikan tombol CTA navbar di HP agar tidak bertabrakan dengan hamburger menu */
+    .nav-actions .cta-link {
+        display: none;
+    }
+
+    /* 2. Rapikan tata letak header agar Logo di kiri dan Hamburger Menu di kanan */
+    .nav-container {
+        height: 60px;
+        padding: 0 1.25rem;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: var(--text-main);
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    /* 3. Menu dropdown saat hamburger diklik */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #070B14;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+        gap: 1.25rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* 4. Penyesuaian layout Hero di mobile */
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-grid, .grid-2, .features-grid, .steps-wrapper, .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .simulator-results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-sticky-bar {
+        display: flex;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+    }
+
+    body {
+        padding-bottom: 60px;
+    }
 }
+
