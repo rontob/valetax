@@ -555,11 +555,24 @@ ul {
 .sticky-info .val { font-weight: 800; font-size: 1.1rem; }
 
 /* REVEAL ANIMATION */
+/* Fail-safe: Konten tetap terlihat secara default */
 .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Hanya sembunyikan untuk animasi jika JavaScript sudah dipastikan siap */
+body.js-ready .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease-out;
 }
+
+body.js-ready .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 .reveal.active {
     opacity: 1;
