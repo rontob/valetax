@@ -758,4 +758,26 @@ body.js-ready .reveal.active {
         border-radius: 12px;
     }
 }
+/* ==========================================================================
+   HERO 9:16 IMAGE CONTAINER
+   ========================================================================== */
+.hero-img-container {
+    width: 100%;
+    max-width: 380px; /* Lebar ideal untuk aspek 9:16 */
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 230, 118, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 194, 255, 0.15);
+    background: rgba(17, 24, 39, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    display: block;
+}
 
