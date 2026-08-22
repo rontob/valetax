@@ -683,3 +683,42 @@ body.js-ready .reveal.active {
         padding-bottom: 60px;
     }
 }
+/* ==========================================================================
+   FLOATING WHATSAPP BUTTON
+   ========================================================================== */
+.wa-float-btn {
+    position: fixed;
+    bottom: 85px; /* Posisinya aman di atas Mobile Sticky Bar */
+    right: 20px;
+    background-color: #25D366;
+    color: #FFFFFF !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wa-float-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.wa-float-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+    .wa-float-btn {
+        bottom: 75px;
+        right: 15px;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
