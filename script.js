@@ -1,5 +1,15 @@
+/**
+ * VALETAX COPYTRADE LANDING PAGE ENGINE
+ * Vanilla JS logic: Interactive simulator, IntersectionObserver, FAQ accordion, dynamic config.
+ */
+
+// 1. CONFIGURATION (Ubah link pendaftaran utama di sini)
+const CONFIG = {
+    REGISTER_URL: "https://valetax.com/register", // ganti sesuai affiliate/referral link
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Inisialisasi ikon secara aman (mencegah script macet jika CDN lambat)
+    // 2. Inisialisasi ikon secara aman (mencegah script macet jika CDN lambat)
     try {
         if (window.lucide) {
             lucide.createIcons();
@@ -8,10 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.warn("Lucide icons error:", err);
     }
 
-    // 2. Aktifkan mode animasi setelah JS dipastikan berjalan
+    // 3. Aktifkan mode animasi setelah JS dipastikan berjalan
     document.body.classList.add("js-ready");
 
-    // 3. Dynamic CTA links
+    // 4. Dynamic CTA links
     const ctaLinks = document.querySelectorAll(".cta-link");
     ctaLinks.forEach(link => {
         link.setAttribute("href", CONFIG.REGISTER_URL);
@@ -19,13 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
         link.setAttribute("rel", "noopener noreferrer");
     });
 
-    // 4. Auto update copyright year
+    // 5. Auto update copyright year
     const yearEl = document.getElementById("currentYear");
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
     }
 
-    // 5. Interactive Simulator
+    // 6. Interactive Profit Simulator
     const capitalRange = document.getElementById("capitalRange");
     const capitalDisplay = document.getElementById("capitalDisplay");
     const resCapital = document.getElementById("resCapital");
@@ -38,14 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const dailyIllustrative = (capital / 5) * 1;
             const monthlyIllustrative = dailyIllustrative * 30;
 
-            capitalDisplay.textContent = `$${capital.toLocaleString()}`;
-            resCapital.textContent = `$${capital.toLocaleString('.2f')}`;
+            capitalDisplay.textContent = `$${capital.toLocaleString('en-US')}`;
+            // FIXED: Menggunakan toFixed(2) untuk format desimal
+            resCapital.textContent = `$${capital.toFixed(2)}`;
             resDaily.textContent = `~$${dailyIllustrative.toFixed(2)}*`;
             resMonthly.textContent = `~$${monthlyIllustrative.toFixed(2)}*`;
         });
     }
 
-    // 6. FAQ Accordion
+    // 7. FAQ Accordion Logic
     const faqQuestions = document.querySelectorAll(".faq-question");
     faqQuestions.forEach(button => {
         button.addEventListener("click", () => {
@@ -62,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 7. Scroll Reveal Observer
+    // 8. Scroll Reveal Observer
     const revealElements = document.querySelectorAll(".reveal");
     
     if ("IntersectionObserver" in window) {
@@ -74,7 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }, {
-            threshold: 0.05
+            threshold: 0.05,
+            rootMargin: "0px 0px -50px 0px"
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
@@ -82,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         revealElements.forEach(el => el.classList.add("active"));
     }
 
-    // 8. Mobile Menu Toggle
+    // 9. Mobile Menu Drawer Toggle
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
 
@@ -98,112 +110,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-/**
- * VALETAX COPYTRADE LANDING PAGE ENGINE
- * Vanilla JS logic: Interactive simulator, IntersectionObserver, FAQ accordion, dynamic config.
- */
-
-// 1. CONFIGURATION (Ubah link pendaftaran utama di sini)
-const CONFIG = {
-    REGISTER_URL: "https://valetax.com/register", // ganti sesuai affiliate/referral link
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Initialize Lucide Icons
-    if (window.lucide) {
-        lucide.createIcons();
-    }
-
-    // Attach dynamic URLs to CTA buttons
-    const ctaLinks = document.querySelectorAll(".cta-link");
-    ctaLinks.forEach(link => {
-        link.setAttribute("href", CONFIG.REGISTER_URL);
-        link.setAttribute("target", "_blank");
-        link.setAttribute("rel", "noopener noreferrer");
-    });
-
-    // Auto update copyright year
-    const yearEl = document.getElementById("currentYear");
-    if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-    }
-
-    // 2. INTERACTIVE PROFIT SIMULATOR LOGIC
-    const capitalRange = document.getElementById("capitalRange");
-    const capitalDisplay = document.getElementById("capitalDisplay");
-    const resCapital = document.getElementById("resCapital");
-    const resDaily = document.getElementById("resDaily");
-    const resMonthly = document.getElementById("resMonthly");
-
-    if (capitalRange) {
-        capitalRange.addEventListener("input", (e) => {
-            const capital = parseFloat(e.target.value);
-            
-            // Mathematical linear model for illustrative purposes ($5 base -> $1 daily sample)
-            const dailyIllustrative = (capital / 5) * 1;
-            const monthlyIllustrative = dailyIllustrative * 30;
-
-            capitalDisplay.textContent = `$${capital.toLocaleString()}`;
-            resCapital.textContent = `$${capital.toLocaleString('.2f')}`;
-            resDaily.textContent = `~$${dailyIllustrative.toFixed(2)}*`;
-            resMonthly.textContent = `~$${monthlyIllustrative.toFixed(2)}*`;
-        });
-    }
-
-    // 3. FAQ ACCORDION LOGIC
-    const faqQuestions = document.querySelectorAll(".faq-question");
-    faqQuestions.forEach(button => {
-        button.addEventListener("click", () => {
-            const faqItem = button.parentElement;
-            const isActive = faqItem.classList.contains("active");
-
-            // Close all items
-            document.querySelectorAll(".faq-item").forEach(item => {
-                item.classList.remove("active");
-            });
-
-            // Toggle current item if it wasn't active
-            if (!isActive) {
-                faqItem.classList.add("active");
-            }
-        });
-    });
-
-    // 4. SCROLL REVEAL ANIMATION (IntersectionObserver)
-    const revealElements = document.querySelectorAll(".reveal");
-    
-    if ("IntersectionObserver" in window) {
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("active");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-    } else {
-        // Fallback for older browsers
-        revealElements.forEach(el => el.classList.add("active"));
-    }
-
-    // 5. MOBILE MENU DRAWER TOGGLE
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
-
-    // Otomatis tutup menu saat salah satu link diklik
-    document.querySelectorAll(".nav-item").forEach(item => {
-        item.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-        });
-    });
-}
