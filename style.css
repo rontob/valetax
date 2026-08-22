@@ -55,12 +55,31 @@ ul {
 }
 
 /* Background Effects */
+/* ==========================================================================
+   FIX HORIZONTAL SCROLL (OVERFLOW FIX)
+   ========================================================================== */
+
+/* 1. Kunci overflow-x di level HTML dan BODY */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 2. Pastikan semua elemen gambar/SVG tidak melebihi lebar kontainer */
+img, svg {
+    max-width: 100%;
+}
+
+/* 3. Perbaiki .bg-grid-pattern dari 100vw menjadi 100% */
 .bg-grid-pattern {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     background-image: 
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -69,26 +88,27 @@ ul {
     pointer-events: none;
 }
 
+/* 4. Batasi area penampung elemen glow agar tidak 'bocor' keluar layar */
 .glow-sphere {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 300px; /* Diperkecil sedikit untuk mobile agar lebih rapi */
+    height: 300px;
     border-radius: 50%;
-    filter: blur(140px);
+    filter: blur(120px);
     z-index: -1;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 .glow-top-left {
-    top: -100px;
-    left: -100px;
+    top: -50px;
+    left: -50px;
     background: radial-gradient(circle, var(--accent-cyan), transparent);
 }
 
 .glow-bottom-right {
     bottom: 10%;
-    right: -100px;
+    right: -50px;
     background: radial-gradient(circle, var(--accent-green), transparent);
 }
 
