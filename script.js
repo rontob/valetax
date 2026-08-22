@@ -92,23 +92,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 5. MOBILE MENU DRAWER TOGGLE
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
 
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => {
-            const isOpen = navLinks.style.display === "flex";
-            navLinks.style.display = isOpen ? "none" : "flex";
-            if (!isOpen) {
-                navLinks.style.flexDirection = "column";
-                navLinks.style.position = "absolute";
-                navLinks.style.top = "70px";
-                navLinks.style.left = "0";
-                navLinks.style.width = "100%";
-                navLinks.style.background = "#070B14";
-                navLinks.style.padding = "1.5rem";
-                navLinks.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
-            }
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+
+    // Otomatis tutup menu saat salah satu link diklik
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.addEventListener("click", () => {
+            navLinks.classList.remove("active");
         });
-    }
-});
+    });
+}
