@@ -24,7 +24,9 @@
     --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Resets */
+/* ==========================================================================
+   BASE RESETS & OVERFLOW CONTROL
+   ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -36,13 +38,22 @@ html {
     font-size: 16px;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-main);
     font-family: var(--font-family);
     line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
 }
 
 a {
@@ -55,23 +66,6 @@ ul {
 }
 
 /* Background Effects */
-/* ==========================================================================
-   FIX HORIZONTAL SCROLL (OVERFLOW FIX)
-   ========================================================================== */
-
-/* 1. Kunci overflow-x di level HTML dan BODY */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-    position: relative;
-}
-
-/* 2. Pastikan semua elemen gambar/SVG tidak melebihi lebar kontainer */
-img, svg {
-    max-width: 100%;
-}
-
-/* 3. Perbaiki .bg-grid-pattern dari 100vw menjadi 100% */
 .bg-grid-pattern {
     position: fixed;
     top: 0;
@@ -88,10 +82,9 @@ img, svg {
     pointer-events: none;
 }
 
-/* 4. Batasi area penampung elemen glow agar tidak 'bocor' keluar layar */
 .glow-sphere {
     position: absolute;
-    width: 300px; /* Diperkecil sedikit untuk mobile agar lebih rapi */
+    width: 300px;
     height: 300px;
     border-radius: 50%;
     filter: blur(120px);
@@ -112,7 +105,9 @@ img, svg {
     background: radial-gradient(circle, var(--accent-green), transparent);
 }
 
-/* Utilities */
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -127,7 +122,9 @@ img, svg {
 .text-cyan { color: var(--accent-cyan); }
 .text-warning { color: var(--text-warning); }
 .text-muted { color: var(--text-muted); }
-.flex-center { display: flex; justify-center: center; align-items: center; }
+
+/* FIXED: properti justify-content diperbaiki */
+.flex-center { display: flex; justify-content: center; align-items: center; }
 .margin-auto { margin-left: auto; margin-right: auto; }
 
 .section-padding { padding: 5rem 0; }
@@ -218,7 +215,9 @@ img, svg {
 .btn-lg { padding: 1rem 2rem; font-size: 1rem; }
 .btn-sm { padding: 0.5rem 1rem; font-size: 0.85rem; }
 
-/* NAVBAR */
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
 .navbar {
     position: sticky;
     top: 0;
@@ -274,7 +273,9 @@ img, svg {
     cursor: pointer;
 }
 
-/* HERO SECTION */
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
 .hero-section {
     padding: 6rem 0 4rem;
     position: relative;
@@ -362,7 +363,7 @@ img, svg {
 .balance-value { font-size: 2rem; font-weight: 800; }
 .performance-tag { font-size: 0.8rem; font-weight: 600; }
 
-.trading-chart-svg { width: 100%; height: 120px; overflow: visible; }
+.trading-chart-svg { width: 100%; height: 120px; overflow: hidden; }
 .animated-line {
     stroke-dasharray: 1000; stroke-dashoffset: 1000;
     animation: dash 3s ease-in-out forwards infinite;
@@ -386,7 +387,9 @@ img, svg {
     font-size: 0.65rem; color: var(--text-muted); margin-top: 1rem; text-align: center; font-style: italic;
 }
 
-/* FLOW SECTION */
+/* ==========================================================================
+   FLOW SECTION
+   ========================================================================== */
 .connection-flow {
     display: flex;
     align-items: center;
@@ -415,7 +418,9 @@ img, svg {
     color: var(--text-muted);
 }
 
-/* TABLE MATRIX */
+/* ==========================================================================
+   TABLE MATRIX
+   ========================================================================== */
 .capital-hero-banner {
     text-align: center;
     margin: 2rem 0;
@@ -427,6 +432,11 @@ img, svg {
     line-height: 1;
     color: var(--accent-green);
     text-shadow: 0 0 30px var(--accent-green-glow);
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 
 .sim-table {
@@ -452,9 +462,12 @@ img, svg {
     margin-top: 1rem;
 }
 
-/* SIMULATOR */
+/* ==========================================================================
+   SIMULATOR
+   ========================================================================== */
+/* FIXED: Sintaks max-w-800: ; diperbaiki menjadi max-width: 800px */
 .simulator-card {
-    max-w-800: ;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -494,7 +507,9 @@ img, svg {
 
 .simulator-note { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; border-left: 2px solid var(--text-warning); padding-left: 0.75rem; }
 
-/* FEATURES GRID */
+/* ==========================================================================
+   FEATURES GRID & STEPS
+   ========================================================================== */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -505,7 +520,6 @@ img, svg {
 .feature-card h3 { font-size: 1.15rem; margin: 1rem 0 0.5rem; }
 .feature-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-/* STEPS */
 .steps-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -532,7 +546,9 @@ img, svg {
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 
-/* FAQ */
+/* ==========================================================================
+   FAQ ACCORDION
+   ========================================================================== */
 .faq-accordion { display: grid; gap: 1rem; margin-top: 2rem; }
 .faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
 .faq-question {
@@ -544,7 +560,9 @@ img, svg {
 .faq-item.active .faq-answer { display: block; }
 .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-/* FOOTER */
+/* ==========================================================================
+   FOOTER & STICKY MOBILE CTA
+   ========================================================================== */
 .site-footer { background: #04070D; padding: 4rem 0 2rem; border-top: 1px solid var(--border-color); }
 .footer-top-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
 .footer-tagline { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
@@ -554,7 +572,6 @@ img, svg {
 .footer-disclaimer-text { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 2rem; }
 .footer-bottom { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
 
-/* STICKY MOBILE CTA */
 .mobile-sticky-bar {
     display: none;
     position: fixed;
@@ -574,15 +591,15 @@ img, svg {
 .sticky-info .label { font-size: 0.65rem; color: var(--text-muted); }
 .sticky-info .val { font-weight: 800; font-size: 1.1rem; }
 
-/* REVEAL ANIMATION */
-/* Fail-safe: Konten tetap terlihat secara default */
+/* ==========================================================================
+   REVEAL ANIMATION (FAIL-SAFE)
+   ========================================================================== */
 .reveal {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Hanya sembunyikan untuk animasi jika JavaScript sudah dipastikan siap */
 body.js-ready .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -593,13 +610,9 @@ body.js-ready .reveal.active {
     transform: translateY(0);
 }
 
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* MEDIA QUERIES (MOBILE FIRST OPTIMIZATIONS) */
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
 @media (max-width: 992px) {
     .hero-grid, .grid-2, .features-grid, .steps-wrapper, .grid-3 { grid-template-columns: 1fr; }
     .connection-flow { flex-direction: column; }
@@ -607,15 +620,11 @@ body.js-ready .reveal.active {
     .footer-top-grid { grid-template-columns: 1fr; }
 }
 
-
-/* ACCESSIBILITY PREFERS REDUCED MOTION */
 @media (max-width: 768px) {
-    /* 1. Sembunyikan tombol CTA navbar di HP agar tidak bertabrakan dengan hamburger menu */
     .nav-actions .cta-link {
         display: none;
     }
 
-    /* 2. Rapikan tata letak header agar Logo di kiri dan Hamburger Menu di kanan */
     .nav-container {
         height: 60px;
         padding: 0 1.25rem;
@@ -632,7 +641,6 @@ body.js-ready .reveal.active {
         padding: 0.5rem;
     }
 
-    /* 3. Menu dropdown saat hamburger diklik */
     .nav-links {
         display: none;
         flex-direction: column;
@@ -651,7 +659,6 @@ body.js-ready .reveal.active {
         display: flex;
     }
 
-    /* 4. Penyesuaian layout Hero di mobile */
     .hero-title {
         font-size: 2.2rem;
     }
@@ -676,4 +683,3 @@ body.js-ready .reveal.active {
         padding-bottom: 60px;
     }
 }
-
