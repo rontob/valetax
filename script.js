@@ -5,7 +5,7 @@
 
 // 1. CONFIGURATION (Ubah link pendaftaran utama di sini)
 const CONFIG = {
-    REGISTER_URL: "https://s.id/valetax-fx", // ganti sesuai affiliate/referral link
+    REGISTER_URL: "https://s.id/daftar-valetax", // ganti sesuai affiliate/referral link
 };
 
 document.addEventListener("DOMContentLoaded", () => {
